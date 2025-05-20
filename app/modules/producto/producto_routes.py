@@ -54,12 +54,13 @@ def modificar(id):
     except Exception as exc:
          return jsonify({'mensaje': f" error : {str(exc)}"}), 500
 
-@producto_bp.route("/productos/id", methods=["DELETE"])
+@producto_bp.route("/productos/<int:id>", methods=["DELETE"])
 def eliminar(id):
     try:
         result = ProductoController.eliminar(id)
         if result:
             return jsonify({'mensaje':"producto eliminado con exito"})
-        return jsonify({'mensaje':"error al eliminar un producto"})
+        else:
+            return jsonify({'mensaje':"error al eliminar un producto"})
     except Exception as exc:
         return jsonify({'mensaje':f"error str{exc}"})
